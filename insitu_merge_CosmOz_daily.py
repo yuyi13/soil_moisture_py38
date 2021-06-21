@@ -1,8 +1,12 @@
 import pandas as pd
 import os
 
+# daily time series
+# path_insitu = 'E:/Userdata/yuy/downloads/insitu_comparison/CosmOz/'
+
+# monthly time series
 path_insitu = 'E:/Userdata/yuy/downloads/insitu_comparison/CosmOz/'
-path_satellite = 'E:/Userdata/yuy/downloads/insitu_comparison/experiment8/0_corrected_process/3_in_situ_validation/CosmOz.csv'
+path_satellite = 'E:/Userdata/yuy/downloads/wetness_v3/insitu/CosmOz.csv'
 
 for filename in os.listdir(path_insitu):
     if filename.endswith('_output.csv'):
@@ -20,7 +24,7 @@ for filename in os.listdir(path_insitu):
 
         # merge two dataframes according to the time series
         df = df.merge(df1, on=['UTC_TIMESTAMP'], how='left')
-        df = df.rename(columns={number: 'fitted_corrected'})
+        df = df.rename(columns={number: 'TCMerged'})
 
-        df.to_csv(('E:/Userdata/yuy/downloads/insitu_comparison/experiment8/0_corrected_process/3_in_situ_validation/CosmOz_comparison/' +
+        df.to_csv(('E:/Userdata/yuy/downloads/wetness_v3/insitu/CosmOz_comparison/' +
                   site_number + '.csv'), index=False)
